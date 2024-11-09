@@ -26,9 +26,15 @@ export const AuthProvider = () => {
   }
 
   useEffect(() => {
-    if (!user && !window.location.pathname.includes("/login")) {
+    const isNavigateToLoginPage = window.location.pathname.includes("/login")
+
+    if (!user && !isNavigateToLoginPage) {
       // user is not authenticated
       navigate("/login", { replace: true })
+    }
+
+    if (user && isNavigateToLoginPage) {
+      navigate("/", { replace: true })
     }
   }, [user])
 

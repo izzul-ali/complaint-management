@@ -4,8 +4,11 @@ import Button from "@mui/material/Button"
 import FormLabel from "@mui/material/FormLabel"
 import FormControl from "@mui/material/FormControl"
 import TextField from "@mui/material/TextField"
+import { useAuth } from "../../../hooks/useAuth"
 
 export default function LoginPage() {
+  const auth = useAuth()
+
   const [emailError, setEmailError] = React.useState(false)
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("")
   const [passwordError, setPasswordError] = React.useState(false)
@@ -17,9 +20,11 @@ export default function LoginPage() {
       return
     }
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    auth?.login({
+      userId: "",
+      username: data.get("email")?.toString()!,
+      email: data.get("email")?.toString()!,
+      // password: data.get("password"),
     })
   }
 
@@ -49,6 +54,8 @@ export default function LoginPage() {
 
     return isValid
   }
+
+  if (auth?.user) return <></>
 
   return (
     <section className="h-screen flex flex-col md:flex-row gap-0 md:gap-10 p-8">
@@ -127,7 +134,6 @@ export default function LoginPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                autoFocus
                 required
                 fullWidth
                 variant="outlined"
