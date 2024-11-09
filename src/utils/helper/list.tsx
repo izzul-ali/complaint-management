@@ -4,7 +4,6 @@ import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined"
 import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined"
 // import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined"
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined"
-import AccountTreeOutlinedIcon from "@mui/icons-material/AccountTreeOutlined"
 
 export const navigationList = [
   {
@@ -31,11 +30,6 @@ export const navigationList = [
     name: "User Management",
     url: "/user-management",
     icon: <BadgeOutlinedIcon />,
-  },
-  {
-    name: "Role Management",
-    url: "/role-management",
-    icon: <AccountTreeOutlinedIcon className="w-5 h-5 mx-0.5" />,
   },
   // {
   //   name: "Setting",

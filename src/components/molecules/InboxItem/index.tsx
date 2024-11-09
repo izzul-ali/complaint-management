@@ -13,7 +13,7 @@ export default function InboxItem({ inbox, isSelected, onClick }: Props) {
     <ListItemButton
       onClick={() => onClick()}
       selected={isSelected}
-      className={`outline-none w-full p-2 rounded-lg h-fit transition-all duration-100 hover:bg-[#FAFAFA] flex gap-2`}
+      className={`outline-none w-full mt-2 p-2 rounded-lg h-fit transition-all duration-100 hover:bg-[#FAFAFA] flex gap-2`}
     >
       <Avatar
         alt={inbox.customerName}

@@ -1,7 +1,17 @@
-import { Divider, Step, StepButton, Stepper, Tooltip } from "@mui/material"
+import {
+  Button,
+  Divider,
+  Step,
+  StepButton,
+  Stepper,
+  Tooltip,
+} from "@mui/material"
 import PersonPinCircleOutlinedIcon from "@mui/icons-material/PersonPinCircleOutlined"
 import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined"
 import ManageHistoryOutlinedIcon from "@mui/icons-material/ManageHistoryOutlined"
+import EngineeringOutlinedIcon from "@mui/icons-material/EngineeringOutlined"
+import InputFile from "../../../atoms/Input/InputFile"
+import InputMultiline from "../../../atoms/Input/InputMultiline"
 
 export default function TaskDetailPage() {
   return (
@@ -46,11 +56,11 @@ export default function TaskDetailPage() {
           </Tooltip>
         </div>
 
-        <h2 className="mt-14 font-semibold text-xl text-secondary">
+        <h2 className="mt-10 font-semibold text-xl text-secondary">
           Description
         </h2>
 
-        <p className="mt-5 text-sm text-secondary leading-6">
+        <p className="mt-5 text-sm text-secondary leading-6 hyphens-auto tracking-wide">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, ea
           velit. Illo amet perferendis possimus magnam officia corrupti quos
           quisquam, optio laboriosam pariatur suscipit numquam hic velit nam,
@@ -87,7 +97,65 @@ export default function TaskDetailPage() {
           ))}
         </Stepper>
       </section>
-      <section className="p-5 w-[372px] h-full bg-white rounded-md"></section>
+      <section className="p-5 w-[372px] h-full overflow-auto bg-white rounded-md">
+        <h1 className="font-semibold text-xl text-secondary">
+          Laporan Hasil Kerja Teknisi
+        </h1>
+
+        {/* Technician */}
+        <div className="flex items-center gap-2 mt-3">
+          <EngineeringOutlinedIcon className="text-secondary400 w-4 h-4" />
+
+          <span className="block text-sm font-medium text-secondary400">
+            Hisyam Arsyad - A1301
+          </span>
+        </div>
+
+        {/* Detail Customer */}
+        <h2 className="mt-8 font-semibold text-lg text-secondary">
+          Detail Customer
+        </h2>
+
+        <div className="mt-5 space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-secondary400 font-medium">
+              Nama Customer
+            </span>
+            <span className="flex-1 w-full text-right text-sm text-secondary font-semibold">
+              Santika Dewi
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-secondary400 font-medium">Type</span>
+            <span className="flex-1 w-full text-right text-sm text-secondary font-semibold">
+              Broadband
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-secondary400 font-medium">
+              Jumlah Complaint
+            </span>
+            <span className="flex-1 w-full text-right text-sm text-secondary font-semibold">
+              1
+            </span>
+          </div>
+        </div>
+
+        {/* Report */}
+        <h2 className="mt-8 mb-5 font-semibold text-lg text-secondary">
+          Laporan
+        </h2>
+
+        <div className="space-y-3">
+          <InputFile label="File submissions" />
+
+          <InputMultiline label="Note" />
+
+          <Button className="w-full py-2.5" variant="contained">
+            Submit
+          </Button>
+        </div>
+      </section>
     </section>
   )
 }

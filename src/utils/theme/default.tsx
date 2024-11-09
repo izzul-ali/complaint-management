@@ -32,7 +32,7 @@ export const theme = createTheme({
           color: "white",
         },
         root: {
-          borderRadius: "10px",
+          borderRadius: "8px",
           fontSize: "14px",
           padding: "6px 16px",
           color: "#141522",

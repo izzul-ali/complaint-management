@@ -6,6 +6,7 @@ import {
   InboxCustomer,
 } from "../../../interface/conversation"
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined"
+import BoxSendMessage from "../../atoms/BoxSendMessage"
 
 const chatConversations: ChatConversation[] = [
   {
@@ -46,7 +47,7 @@ export default function Conversation({
   onCloseConversation,
 }: Props) {
   return (
-    <section className="w-full h-full flex-1">
+    <section className="w-full h-full flex-1 relative">
       <div className="bg-white h-[80px] px-5 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <IconButton onClick={() => onCloseConversation()}>
@@ -64,7 +65,7 @@ export default function Conversation({
         <Button variant="contained">Create Ticket</Button>
       </div>
 
-      <div className="flex-1 h-full overflow-auto p-10 space-y-2">
+      <div className="flex-1 h-full overflow-auto p-7 space-y-2">
         {chatConversations.map((item, idx) => {
           if (!item.message && !item.file) {
             return <React.Fragment key={idx}></React.Fragment>
@@ -123,6 +124,8 @@ export default function Conversation({
         })}
         {/* <div ref={messagesEndRef} /> */}
       </div>
+
+      <BoxSendMessage />
     </section>
   )
 }

@@ -66,8 +66,7 @@ export default function LoginPage() {
           </h1>
 
           <span className="text-[#313957] mt-2 block">
-            Today is a new day. It's your day. You shape it. Sign in to start
-            managing your projects.
+            Please login to access your account.
           </span>
 
           <Box
@@ -130,7 +129,7 @@ export default function LoginPage() {
                 error={passwordError}
                 helperText={passwordErrorMessage}
                 name="password"
-                placeholder="At least 6 characters"
+                placeholder="Your password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -158,7 +157,7 @@ export default function LoginPage() {
               fullWidth
               variant="contained"
               onClick={validateInputs}
-              className="bg-[#162D3A] text-white rounded-md p-3 mt-2"
+              className="rounded-md p-3 mt-2"
             >
               Sign in
             </Button>
@@ -166,7 +165,21 @@ export default function LoginPage() {
         </div>
       </div>
 
-      <div className="order-first md:order-last rounded-3xl md:flex-1 h-[180px] md:h-full bg-[url('/images/login.png')] bg-cover"></div>
+      <div className="order-first md:order-last rounded-3xl md:w-[40%] h-[180px] md:h-full flex flex-col gap-3 items-center justify-center bg-[#E2F0FF] relative">
+        <img src="/images/login-icon.png" alt="login" className="w-[50%]" />
+
+        <h1 className="text-secondary mt-5 text-2xl font-bold">
+          Complaint Management System
+        </h1>
+        <p className="text-secondary400 text-sm text-center">
+          Lorem ipsum dolor sit, amet consectetur <br /> adipisicing elit. Modi,
+          quas?
+        </p>
+        <p className="absolute bottom-10 w-full text-center text-xs text-slate-400 tracking-wide">
+          Copyright ©2024 Developer Complaint Management System <br /> All
+          Rights Reserved
+        </p>
+      </div>
     </section>
   )
 }

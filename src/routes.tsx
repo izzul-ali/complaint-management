@@ -7,7 +7,6 @@ import ConversationPage from "./components/organisms/ConversationPage"
 import TaskPage from "./components/organisms/TaskPage/List"
 import SchedulePage from "./components/organisms/SchedulePage"
 import UserManagementPage from "./components/organisms/UserManagementPage"
-import RoleManagementPage from "./components/organisms/RoleManagementPage"
 import TaskDetailPage from "./components/organisms/TaskPage/Detail"
 
 export const routes = createBrowserRouter([
@@ -46,10 +45,6 @@ export const routes = createBrowserRouter([
           {
             path: "/user-management",
             element: <UserManagementPage />,
-          },
-          {
-            path: "/role-management",
-            element: <RoleManagementPage />,
           },
           // {
           //   path: "/setting",

@@ -4,6 +4,7 @@ import InboxItem from "../../molecules/InboxItem"
 import { InboxCustomer } from "../../../interface/conversation"
 import InputSearch from "../../atoms/Search"
 import Conversation from "../../molecules/Conversation"
+import SpeakerNotesOutlinedIcon from "@mui/icons-material/SpeakerNotesOutlined"
 
 const inboxCustomers: InboxCustomer[] = [
   {
@@ -96,14 +97,14 @@ export default function ConversationPage() {
   const [selectedCustoemr, setSelectedCustoemr] = useState<InboxCustomer>()
 
   return (
-    <section className="flex h-[91%] overflow-hidden">
+    <section className="flex h-[90%] overflow-hidden">
       {/* Inbox */}
       <section className="w-[400px] h-full bg-white">
         <div className="p-5">
           <InputSearch placeholder="Search  Name" />
         </div>
 
-        <div className="overflow-auto">
+        <div className="overflow-auto h-full pb-10">
           <div className="px-5 h-full space-y-0.5">
             <List sx={{ gap: 10 }}>
               {/* <TransitionGroup appear> */}
@@ -135,9 +136,10 @@ export default function ConversationPage() {
           onCloseConversation={() => setSelectedCustoemr(undefined)}
         />
       ) : (
-        <div className="h-[91%] w-full flex-1 flex items-center justify-center">
-          <span className="font-bold text-secondary300 text-xl block w-fit">
-            Select Conversation First
+        <div className="h-full w-full flex-1 flex flex-col gap-2 items-center justify-center">
+          <SpeakerNotesOutlinedIcon className="text-secondary300 w-8 h-8" />
+          <span className="font-semibold text-secondary300 text-lg block w-fit">
+            Select one of the chats from the left sidebar
           </span>
         </div>
       )}
