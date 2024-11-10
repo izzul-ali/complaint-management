@@ -100,7 +100,7 @@ export default function UserManagementPage() {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (newPage: number) => {
     setPage(newPage)
   }
 
@@ -167,7 +167,7 @@ export default function UserManagementPage() {
         count={rows.length}
         rowsPerPage={rowsPerPage}
         page={page}
-        onPageChange={handleChangePage}
+        onPageChange={(_, page) => handleChangePage(page)}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </section>
