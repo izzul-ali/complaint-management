@@ -78,6 +78,15 @@ const rows = [
   ),
   createData(
     4,
+    "Kamala Harris",
+    "kamala@gmail.com",
+    "Technician",
+    "Washington, DC, USA",
+    "-",
+    "Active"
+  ),
+  createData(
+    5,
     "Donald J Trump",
     "trump@gmail.com",
     "Customer",
