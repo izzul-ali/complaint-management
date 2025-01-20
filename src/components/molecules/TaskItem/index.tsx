@@ -10,15 +10,24 @@ interface Props {
   description: string
   date: string
   index: number
+  type: "On Going" | "Completed"
   status: "Completed" | "Progress" | "Canceled"
 }
 
-export default function TaskItem(props: Props) {
+export default function TaskItem(props: Readonly<Props>) {
   const navigate = useNavigate()
+
+  const onNavigate = (id: string) => {
+    if (props.type === "Completed") {
+      navigate("/task/completed/" + id)
+    } else {
+      navigate("/task/on-going/" + id)
+    }
+  }
 
   return (
     <div
-      onClick={() => navigate("/task/" + props.index)}
+      onClick={() => onNavigate(props.index.toString())}
       className="w-[328px] h-[314px] rounded-[10px] cursor-pointer transition-all duration-300 bg-white hover:bg-slate-50 hover:-translate-y-1 p-5 shadow-md shrink-0"
     >
       <img

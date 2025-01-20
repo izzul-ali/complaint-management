@@ -1,9 +1,16 @@
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined"
 import { Avatar, Badge, IconButton } from "@mui/material"
 import { useLocation } from "react-router-dom"
+import { useAuth } from "../../../hooks/useAuth"
+import LogoutIcon from "@mui/icons-material/Logout"
 
 export default function Header() {
   const location = useLocation()
+  const auth = useAuth()
+
+  const handleLogout = () => {
+    auth?.logout()
+  }
 
   function formatPathToTitle(): string {
     if (location.pathname === "/") return "Overview"
@@ -31,10 +38,18 @@ export default function Header() {
 
         <IconButton>
           <Avatar
-            alt="Cindy Baker"
+            alt={auth?.user?.name ?? "-"}
             src="/static/images/avatar/3.jpg"
-            className="w-9 h-9"
+            className="w-8 h-8 text-sm"
           />
+        </IconButton>
+
+        <p className="max-w-[400px] overflow-hidden whitespace-nowrap text-ellipsis font-medium">
+          {auth?.user?.name ?? "-"}
+        </p>
+
+        <IconButton onClick={() => handleLogout()}>
+          <LogoutIcon className="w-5 h-5 text-error" />
         </IconButton>
       </div>
     </header>

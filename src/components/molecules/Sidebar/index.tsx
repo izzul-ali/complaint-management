@@ -1,20 +1,26 @@
+import React, { useState } from "react"
 import {
   Box,
+  Collapse,
   Drawer,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material"
 import { navigationList } from "../../../utils/helper/list"
 import { useNavigate, useLocation } from "react-router-dom"
+import ExpandLess from "@mui/icons-material/ExpandLess"
+import ExpandMore from "@mui/icons-material/ExpandMore"
+import { useAuth } from "../../../hooks/useAuth"
+import { hasPermssion } from "../../../utils/helper/permission"
 
 export default function Sidebar() {
   const navigate = useNavigate()
   const location = useLocation()
-  //   const container =
-  //     window !== undefined ? () => window.document.body : undefined
+  const auth = useAuth()
+
+  const [open, setOpen] = useState(false)
 
   return (
     <Box
@@ -60,11 +66,26 @@ export default function Sidebar() {
           {navigationList.map((it) => {
             const isActive = location.pathname === it.url
 
+            const isHasPermission = hasPermssion(
+              it.roles,
+              (auth?.user?.role_name ?? "-") as any
+            )
+
+            if (!isHasPermission) {
+              return <React.Fragment key={it.name}></React.Fragment>
+            }
+
             return (
-              <ListItem key={it.url}>
+              <React.Fragment key={it.name}>
                 <ListItemButton
                   selected={isActive}
-                  onClick={() => navigate(it.url)}
+                  onClick={() => {
+                    if (it.submenu) {
+                      setOpen(!open)
+                    } else {
+                      navigate(it.url)
+                    }
+                  }}
                   className="rounded-lg"
                 >
                   <ListItemIcon
@@ -81,8 +102,64 @@ export default function Sidebar() {
                       isActive ? "text-secondary" : "text-secondary300"
                     }`}
                   />
+
+                  {it?.submenu && (
+                    <>
+                      {open ? (
+                        <ExpandLess className="text-secondary300" />
+                      ) : (
+                        <ExpandMore className="text-secondary300" />
+                      )}
+                    </>
+                  )}
                 </ListItemButton>
-              </ListItem>
+                {it.submenu && (
+                  <Collapse
+                    className="block"
+                    in={open}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <List
+                      component="div"
+                      disablePadding={false}
+                      className="block"
+                    >
+                      {it.submenu.map((sub) => {
+                        const isSubmenuActive = location.pathname.includes(
+                          sub.url
+                        )
+
+                        const isSubmenuHasPermission = hasPermssion(
+                          sub.roles,
+                          (auth?.user?.role_name ?? "-") as any
+                        )
+
+                        if (!isSubmenuHasPermission) {
+                          return <React.Fragment key={it.name}></React.Fragment>
+                        }
+
+                        return (
+                          <ListItemButton
+                            sx={{ pl: 7 }}
+                            onClick={() => navigate(sub.url)}
+                          >
+                            <ListItemText
+                              primary={sub.name}
+                              sx={{ fontSize: "10px" }}
+                              className={`font-semibold text-[10px] ${
+                                isSubmenuActive
+                                  ? "text-secondary"
+                                  : "text-secondary300"
+                              }`}
+                            />
+                          </ListItemButton>
+                        )
+                      })}
+                    </List>
+                  </Collapse>
+                )}
+              </React.Fragment>
             )
           })}
         </List>

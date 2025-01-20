@@ -1,11 +1,13 @@
 import { createContext, useContext, useEffect, useMemo } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
-import { User } from "../interface/user"
+import { IUser } from "../interface/user.interface"
 import { useLocalStorage } from "./useLocalStorage"
+import { ILogin } from "../interface/auth.interface"
+import { apiLogin } from "../services/auth/api"
 
 type THookAuth = {
-  user: User | null
-  login: (user: User) => void
+  user: IUser | null
+  login: (user: ILogin) => Promise<string | undefined>
   logout: () => void
 }
 
@@ -15,14 +17,26 @@ export const AuthProvider = () => {
   const navigate = useNavigate()
   const [user, setUser] = useLocalStorage("user", null)
 
-  const login = async (data: User) => {
-    setUser(data)
+  const login = async (data: ILogin): Promise<string | undefined> => {
+    const resp = await apiLogin(data)
+
+    // Failed to login
+    if (typeof resp === "string") {
+      return resp
+    }
+
+    window.localStorage.setItem("token", resp.token)
+
+    setUser({ ...resp, token: undefined })
+
     navigate("/")
   }
 
   const logout = () => {
-    setUser(null)
-    navigate("/login", { replace: true })
+    window.localStorage.removeItem("user")
+    window.localStorage.removeItem("token")
+    // navigate("/login", { replace: true })
+    window.location.replace("/login")
   }
 
   useEffect(() => {

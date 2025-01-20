@@ -14,21 +14,32 @@ export default function LoginPage() {
   const [passwordError, setPasswordError] = React.useState(false)
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("")
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     if (emailError || passwordError) {
-      event.preventDefault()
       return
     }
+
     const data = new FormData(event.currentTarget)
-    auth?.login({
-      userId: "",
-      username: data.get("email")?.toString()!,
-      email: data.get("email")?.toString()!,
-      // password: data.get("password"),
+
+    const error = await auth?.login({
+      email_phone: data.get("email")?.toString() ?? "",
+      password: data?.get("password")?.toString() ?? "",
     })
+
+    if (error) {
+      setEmailError(true)
+      setPasswordError(true)
+      setPasswordErrorMessage(error)
+    }
   }
 
   const validateInputs = () => {
+    setEmailError(true)
+    setEmailErrorMessage("")
+    setPasswordError(true)
+    setPasswordErrorMessage("")
+
     const email = document.getElementById("email") as HTMLInputElement
     const password = document.getElementById("password") as HTMLInputElement
 
